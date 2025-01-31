@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - JasperReports World Data Base</title>
+    <style>
+        body {
+            background-color: #AFBDDE;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            color: #ff9f4e;
+        }
+        h2 {
+            color: blue;
+        }
+        h3 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        code {
+            background-color: #eabea5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Manual de Usuario - JasperReports World Data Base</h1>
+<p>Este es el manual de usuario de la aplicación de generación de informes. Esta aplicación permite generar informes personalizados en formato PDF basados los parámetros que selecciones.</p>
+
+<h2>1. Inicio de la Aplicación</h2>
+<p>Al iniciar la aplicación, se abrirá una ventana con los siguientes elementos:</p>
+<ul>
+    <li><strong>Desplegable de País:</strong> Selecciona un país de la lista desplegable.</li>
+    <li><strong>Desplegable de Idioma:</strong> Selecciona un idioma de la lista desplegable.</li>
+    <li><strong>Campo de Nombre:</strong> Permite ingresar un nombre para el informe. No tienes que indicar la extensión .pdf</li>
+    <li><strong>Selección de Continentes:</strong> Selecciona un continente. Los campos se encuentran encima del continente en el globo para mayor accesibilidad.</li>
+    <li><strong>Barra de Progreso:</strong> Muestra el progreso de la generación del informe.</li>
+    <li><strong>Botones:</strong>
+        <ul>
+            <li><code>Generar Informe</code>: Genera un informe personalizado dependiendod de las opciones que hayas seleccionado.</li>
+            <li><code>Informe de España</code>: Genera un informe predefinido para España.</li>
+            <li><code>Abrir Carpeta</code>: Abre la carpeta contenedora donde se guardan los informes.</li>
+            <li><code>Limpiar Campos</code>: Restablece los campos a su estado inicial.</li>
+        </ul>
+    </li>
+</ul>
+
+<h2>2. Generar un Informe Personalizado</h2>
+<p>Para generar un informe personalizado, sigue estos pasos:</p>
+<ol>
+    <li>Selecciona un país en el <strong>Desplegable de País</strong>.</li>
+    <li>Selecciona un idioma en el <strong>Desplegable de Idioma</strong>.</li>
+    <li>Selecciona un continente en los <strong>Selección de Continentes</strong>.</li>
+    <li>Ingresa un nombre para el informe en el campo <strong>Nombre</strong>.</li>
+    <li>Haz clic en el botón <code>Generar Informe</code>.</li>
+    <li>La barra de progreso mostrará el avance de la generación del informe.</li>
+    <li>Una vez completado, el informe se guardará en la carpeta <code>src/main/resources/InformesGenerados/</code>.</li>
+</ol>
+<p>Puedes abrir la carpeta contenedora pulsando en el botón de abrir carpeta</p>
+<p>Todos los campos, incluído el campo de elección del nombre, son opcionales</p>
+<p>Las opciones que selecciones actuarán como filtros, si no se selecciona ninguna opción, se generará un informe con toda la información contenida en la base de datos</p>
+
+<h2>3. Generar el Informe de España</h2>
+<p>Para generar un informe predefinido para España, sigue estos pasos:</p>
+<ol>
+    <li>Haz clic en el botón <code>Informe de España</code>.</li>
+    <li>La barra de progreso mostrará el avance de la generación del informe.</li>
+    <li>El informe se guardará automáticamente en la carpeta <code>src/main/resources/InformesGenerados/</code> con el nombre <code>InformeSpain.pdf</code>.</li>
+</ol>
+<p>Puedes abrir la carpeta contenedora pulsando en el botón de abrir carpeta</p>
+
+<h2>4. Abrir la Carpeta de Informes</h2>
+<p>Para abrir la carpeta donde se guardan los informes generados, haz click en el botón <code>Abrir Carpeta</code></p>
+<p>Se abrirá el explorador de archivos en la carpeta contenedora donde podrás ver los informes generados</p>
+<p>Si la carpeta aparece vacía es porque aún no se ha generado ningún informe</p>
+
+<h2>5. Limpiar Campos</h2>
+<p>Para restablecer los campos a su estado inicial, sigue estos pasos:</p>
+<ol>
+    <li>Haz clic en el botón <code>Limpiar Campos</code>.</li>
+    <li>Los campos de nombre, país, idioma y continente se restablecerán, y la barra de progreso volverá a 0.</li>
+</ol>
+
+<h2>6. Soporte y Contacto</h2>
+<p>Si encuentras algún problema o tienes preguntas sobre la aplicación, por favor contacta con Gabriela Jiménez Morcillo en: <code>gabrielajimenez@telefonica.net</code></p>
+<ul>
+    <li><strong>Autor:</strong> Gabriela Jiménez Morcillo</li>
+    <li><strong>Versión:</strong> 1.0</li>
+</ul>
+
+</body>
+</html>
