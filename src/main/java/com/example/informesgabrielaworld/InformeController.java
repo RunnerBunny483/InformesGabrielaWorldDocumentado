@@ -1,5 +1,6 @@
 package com.example.informesgabrielaworld;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +13,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -34,8 +37,8 @@ import java.util.Map;
 public class InformeController {
     @FXML
     private Label labelHelp;
-    @FXML
-    private TextField TXNombre;
+//    @FXML
+//    private TextField TXNombre;
     @FXML
     private Button ButtonClear;
 
@@ -209,10 +212,34 @@ public class InformeController {
                         updateProgress(progress, 1);
                     }
 
-                    //La generación de los jaspers
-                    JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream("/ArchivosJasper/InformeGabriela.jasper"),parametros,connection);
-                    String nombrePDF=TXNombre.getText();
-                    JasperExportManager.exportReportToPdfFile(print,"src/main/resources/InformesGenerados/"+nombrePDF+".pdf");
+//                    //La generación de los jaspers ANTIGUA
+//                    JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream("/ArchivosJasper/InformeGabriela.jasper"),parametros,connection);
+//                    String nombrePDF=TXNombre.getText();
+//                    JasperExportManager.exportReportToPdfFile(print,"src/main/resources/InformesGenerados/"+nombrePDF+".pdf");
+
+
+                    //La nueva forma
+                    Platform.runLater(() -> {
+                        FileChooser fileChooser = new FileChooser();
+                        fileChooser.setTitle("Elige el nombre del informe y donde guardarlo");
+                        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+
+                        File file = fileChooser.showSaveDialog(null);
+
+                        if (file != null) {
+                            JasperPrint print= null;
+                            try {
+                                print = JasperFillManager.fillReport(getClass().getResourceAsStream("/ArchivosJasper/InformeGabriela.jasper"),parametros,connection);
+                            } catch (JRException e) {
+                                throw new RuntimeException(e);
+                            }
+                            try {
+                                JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath());
+                            } catch (JRException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -256,9 +283,32 @@ public class InformeController {
                     parametrosSpain.put("País", "Spain");
                     parametrosSpain.put("Idioma", "Spanish");
 
+                    //Forma antigua
+//                    JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream("/ArchivosJasper/InformeGabrielaSpain.jasper"),parametrosSpain,connection);
+//                    JasperExportManager.exportReportToPdfFile(print,"src/main/resources/InformesGenerados/InformeSpain.pdf");
 
-                    JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream("/ArchivosJasper/InformeGabrielaSpain.jasper"),parametrosSpain,connection);
-                    JasperExportManager.exportReportToPdfFile(print,"src/main/resources/InformesGenerados/InformeSpain.pdf");
+                    //La nueva forma
+                    Platform.runLater(() -> {
+                        FileChooser fileChooser = new FileChooser();
+                        fileChooser.setTitle("Elige el nombre del informe y donde guardarlo");
+                        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+
+                        File file = fileChooser.showSaveDialog(null);
+
+                        if (file != null) {
+                            JasperPrint print= null;
+                            try {
+                                print = JasperFillManager.fillReport(getClass().getResourceAsStream("/ArchivosJasper/InformeGabriela.jasper"),parametrosSpain,connection);
+                            } catch (JRException e) {
+                                throw new RuntimeException(e);
+                            }
+                            try {
+                                JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath());
+                            } catch (JRException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -279,30 +329,30 @@ public class InformeController {
      * @param actionEvent es el parametro que lanza la accion del boton cuando es clickado
      */
     //Action event que abre la carpeta donde se generan los archivos
-    @FXML
-    public void ButtonOpen (ActionEvent actionEvent) {
-        try {
-            //File folder = new File("/home/alumno/Escritorio/DAM2/DESARROLLO DE INTERFACES/JASPERWORLD/InformesGabrielaWorld/src/main/resources/InformesGenerados/");
-            //File folder = new File("G:\\DAM\\SEGUNDO\\INTERFACES\\SEGUNDO TRIMESTRE\\InformesGabrielaWorld-master\\src\\main\\resources\\InformesGenerados");
-            File folder = new File ("src/main/resources/InformesGenerados");
-
-            //Verificamos si la carpeta existe
-            if (folder.exists() && folder.isDirectory()) {
-                String sistemaOperativo = System.getProperty("os.name").toLowerCase();
-                if (sistemaOperativo.contains("win")) {
-                    //Si la carpeta existe la abrimos
-                    Desktop.getDesktop().open(folder);
-                } else if (sistemaOperativo.contains("nix") || sistemaOperativo.contains("nux")) {
-                    //Para LInux
-                    Runtime.getRuntime().exec(new String[]{"xdg-open", folder.getAbsolutePath()});
-                }
-            } else {
-                System.out.println("La carpeta no existe.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @FXML
+//    public void ButtonOpen (ActionEvent actionEvent) {
+//        try {
+//            //File folder = new File("/home/alumno/Escritorio/DAM2/DESARROLLO DE INTERFACES/JASPERWORLD/InformesGabrielaWorld/src/main/resources/InformesGenerados/");
+//            //File folder = new File("G:\\DAM\\SEGUNDO\\INTERFACES\\SEGUNDO TRIMESTRE\\InformesGabrielaWorld-master\\src\\main\\resources\\InformesGenerados");
+//            File folder = new File ("src/main/resources/InformesGenerados");
+//
+//            //Verificamos si la carpeta existe
+//            if (folder.exists() && folder.isDirectory()) {
+//                String sistemaOperativo = System.getProperty("os.name").toLowerCase();
+//                if (sistemaOperativo.contains("win")) {
+//                    //Si la carpeta existe la abrimos
+//                    Desktop.getDesktop().open(folder);
+//                } else if (sistemaOperativo.contains("nix") || sistemaOperativo.contains("nux")) {
+//                    //Para LInux
+//                    Runtime.getRuntime().exec(new String[]{"xdg-open", folder.getAbsolutePath()});
+//                }
+//            } else {
+//                System.out.println("La carpeta no existe.");
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * El metodo ButtonClear: define la accion que realiza la aplicacion cuando el usuario pulse el botón clear fields
@@ -317,7 +367,7 @@ public class InformeController {
         CBCountry.setPromptText(CBCountry.getPromptText());
         CBLanguage.setValue(null);
         CBLanguage.setPromptText(CBLanguage.getPromptText());
-        TXNombre.setText("");
+//        TXNombre.setText("");
 
         if (Continentes.getSelectedToggle() != null) {
             Continentes.getSelectedToggle().setSelected(false);
